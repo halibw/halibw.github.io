@@ -28,7 +28,7 @@
 <meta property="og:description" content="第一次写个人博客，记录下校园网的折腾。为了减少不必要重复学习的时间成本，把内容放在博客，方便下次直接采用。学校采用的是深信服的认证，这网上已经有很多方法教程了，这里不展开详细说明。首先，使用chrome获取认证链接，放到OpenWrt bash脚本里，实现开机自启">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-18T05:07:16.000Z">
-<meta property="article:modified_time" content="2021-05-18T15:09:50.863Z">
+<meta property="article:modified_time" content="2021-06-02T12:31:46.834Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="OpenWrt">
 <meta name="twitter:card" content="summary">
@@ -173,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-05-18 13:07:16 / Modified: 23:09:50" itemprop="dateCreated datePublished" datetime="2021-05-18T13:07:16+08:00">2021-05-18</time>
+              <time title="Created: 2021-05-18 13:07:16" itemprop="dateCreated datePublished" datetime="2021-05-18T13:07:16+08:00">2021-05-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-02 20:31:46" itemprop="dateModified" datetime="2021-06-02T20:31:46+08:00">2021-06-02</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -200,7 +206,7 @@
       
         <p>第一次写个人博客，记录下校园网的折腾。为了减少不必要重复学习的时间成本，把内容放在博客，方便下次直接采用。<br>学校采用的是深信服的认证，这网上已经有很多方法教程了，这里不展开详细说明。<br>首先，使用chrome获取认证链接，放到OpenWrt bash脚本里，实现开机自启</p>
 <span id="more"></span>
-<figure class="highlight bash"><figcaption><span>Hello World!</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh /etc/rc.common</span></span><br><span class="line">START=99</span><br><span class="line"><span class="function"><span class="title">start</span></span>() </span><br><span class="line">&#123;</span><br><span class="line">sleep 10</span><br><span class="line"></span><br><span class="line">IP_LIST=<span class="string">&quot;www.baidu.com&quot;</span></span><br><span class="line"><span class="keyword">for</span> IP <span class="keyword">in</span> <span class="variable">$IP_LIST</span>; <span class="keyword">do</span></span><br><span class="line">    NUM=1</span><br><span class="line">    <span class="keyword">while</span> [ <span class="variable">$NUM</span> -le 3 ]; <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">if</span> ping -c 1 <span class="variable">$IP</span> &gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$IP</span> Ping is successful.&quot;</span></span><br><span class="line">            <span class="built_in">break</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        //在次输入chrome获取到的认证</span><br><span class="line">        //wget-----------</span><br><span class="line">rm -f /login.php //清除日志</span><br><span class="line">            FAIL_COUNT[<span class="variable">$NUM</span>]=<span class="variable">$IP</span></span><br><span class="line">            <span class="built_in">let</span> NUM++</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    <span class="keyword">if</span> [ <span class="variable">$&#123;#FAIL_COUNT[*]&#125;</span> -eq 3 ];<span class="keyword">then</span></span><br><span class="line">	//wget --------------</span><br><span class="line">	rm -f /login.php</span><br><span class="line">        <span class="built_in">unset</span> FAIL_COUNT[*]</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>Hello World!</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh /etc/rc.common</span></span><br><span class="line">START=99</span><br><span class="line"><span class="function"><span class="title">start</span></span>() </span><br><span class="line">&#123;</span><br><span class="line">sleep 10</span><br><span class="line"></span><br><span class="line">IP_LIST=<span class="string">&quot;www.baidu.com&quot;</span> // <span class="built_in">test</span> network connect</span><br><span class="line"><span class="keyword">for</span> IP <span class="keyword">in</span> <span class="variable">$IP_LIST</span>; <span class="keyword">do</span></span><br><span class="line">    NUM=1</span><br><span class="line">    <span class="keyword">while</span> [ <span class="variable">$NUM</span> -le 3 ]; <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">if</span> ping -c 1 <span class="variable">$IP</span> &gt; /dev/null; <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$IP</span> Ping is successful.&quot;</span></span><br><span class="line">            <span class="built_in">break</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        //在次输入chrome获取到的认证</span><br><span class="line">        //wget-----------</span><br><span class="line">rm -f /login.php //清除日志</span><br><span class="line">            FAIL_COUNT[<span class="variable">$NUM</span>]=<span class="variable">$IP</span></span><br><span class="line">            <span class="built_in">let</span> NUM++</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    <span class="keyword">if</span> [ <span class="variable">$&#123;#FAIL_COUNT[*]&#125;</span> -eq 3 ];<span class="keyword">then</span></span><br><span class="line">	//wget --------------</span><br><span class="line">	rm -f /login.php</span><br><span class="line">        <span class="built_in">unset</span> FAIL_COUNT[*]</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>保存的时候，记得注意在windows系统下的CRLF LF格式<br>在linux环境编写时可忽略<br>最后链接到rc.d，使用chmod -R 777 修改权限<br><br/><br>完成</p>
 
     </div>
@@ -218,6 +224,13 @@
 
 
         
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/02/Build-Android/" rel="next" title="Build Android">
+      Build Android <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -288,7 +301,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -297,7 +310,7 @@
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
