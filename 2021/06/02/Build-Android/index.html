@@ -28,7 +28,7 @@
 <meta property="og:description" content="自己手头上有一台闲置的设备，小米max2 代号是oxygen。系统预装的是android 7.1.2,屏幕大小拿来监控挺合适的，7.1的系统现在显然有些apk是装不上的，第三方类原生Android11其他开发者，像O2团队，对他们的印象不好。既然这样，为何不自己编译呢？好了，正文开始">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-06-02T12:34:59.000Z">
-<meta property="article:modified_time" content="2021-06-02T13:38:36.513Z">
+<meta property="article:modified_time" content="2021-06-07T04:08:12.241Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
@@ -173,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-02 20:34:59 / Modified: 21:38:36" itemprop="dateCreated datePublished" datetime="2021-06-02T20:34:59+08:00">2021-06-02</time>
+              <time title="Created: 2021-06-02 20:34:59" itemprop="dateCreated datePublished" datetime="2021-06-02T20:34:59+08:00">2021-06-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-07 12:08:12" itemprop="dateModified" datetime="2021-06-07T12:08:12+08:00">2021-06-07</time>
+              </span>
 
           
 
@@ -199,6 +205,8 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev openjdk-11-jdk git vim</span><br></pre></td></tr></table></figure>
 <p>安装谷歌repo</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/bin</span><br><span class="line">curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo</span><br><span class="line">chmod a+x ~/bin/repo</span><br></pre></td></tr></table></figure>
+<p>root模式时，设置变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; ~/.bashrc &lt;&lt;EOF</span><br><span class="line"></span><br><span class="line"># set PATH so it includes user&#x27;s private bin if it exists</span><br><span class="line">if [ -d &quot;\$HOME/bin&quot; ] ; then</span><br><span class="line">    PATH=&quot;\$HOME/bin:\$PATH&quot;</span><br><span class="line">fi</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
 <p>创建编译文件夹，这里我编译arrowos</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir arrow</span><br><span class="line">cd arrow</span><br><span class="line">repo init -u address // address换成输入你的项目地址，记得选分支</span><br></pre></td></tr></table></figure>
 <p>repo</p>
