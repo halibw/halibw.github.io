@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      468 字
+      465 字
     </span>
   
 
@@ -241,7 +241,7 @@
 <p>root模式时，设置变量</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs jsunicoderegexp">cat &gt;&gt; ~/.bashrc &lt;&lt;EOF<br><br># set PATH so it includes user&#x27;s private bin if it exists<br>if [ -d &quot;\$HOME/bin&quot; ] ; then<br>    PATH=&quot;\$HOME/bin:\$PATH&quot;<br>fi<br>EOF<br><br>source ~/.bashrc<br></code></pre></td></tr></table></figure>
 <p>创建编译文件夹，这里我编译arrowos</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jsunicoderegexp">mkdir arrow<br>cd arrow<br>repo init -u repo init -u https://github.com/ArrowOS/android_manifest.git -b arrow-11.0  // 这里是ArrowOS，记得选分支<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jsunicoderegexp">mkdir arrow<br>cd arrow<br>repo init -u https://github.com/ArrowOS/android_manifest.git -b arrow-11.0  // 这里是ArrowOS，记得选分支<br></code></pre></td></tr></table></figure>
 <p>repo</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsunicoderegexp">repo sync // 服务器环境直接使用该命令即可，自己电脑你可能需要加force参数<br></code></pre></td></tr></table></figure>
 <p>同步Device Tree/Kernel/vendor,小米max2的vendor还有common，也要同步。比如我的<a target="_blank" rel="noopener" href="https://github.com/halibw/android_xiaomi_oxygen_device">https://github.com/halibw/android_xiaomi_oxygen_device</a><br/>然后按需修改</br>AndroidProducts.mk<br/>Device.mk等device文件</br>开始build</p>
