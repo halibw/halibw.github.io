@@ -14,13 +14,29 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="使用openssl-dev替换guntls为什么会有这种需求呢？今天在拉取Android源码时，使用了机场梯子有点抽风，访问网页内容倒是没什么问题。但拉取Github库时一直guntls_handshake()faild:The TLS connection was non-properly terminated，前后鼓搞了各种代理github还是没解决。(其实还是机场路线的问题，自己后来搭的就没">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-  <title>Categories - Halibw</title>
+  <title>openssl-dev替换guntls - Halibw</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +64,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -147,9 +163,46 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Category">
+            <span class="h2" id="subtitle" title="openssl-dev替换guntls">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-15 20:06" pubdate>
+        September 15, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      296 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -162,105 +215,98 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-
-
-
-
-
-
-<div class="category-list">
-  
-  
-  
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-60f3cacf9e1d187c321897b3e90b8585" role="tab" data-toggle="collapse" href="#collapse-60f3cacf9e1d187c321897b3e90b8585"
-        aria-expanded="false"
-      >
-        curl apply
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/curl-apply/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse">
-        
-        
-          
-  <div id="collapse-60f3cacf9e1d187c321897b3e90b8585" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-60f3cacf9e1d187c321897b3e90b8585">
-    
-    
       
-      
-        <a href="/2021/05/18/One-blogs/" class="list-group-item list-group-item-action">
-          <span class="category-post">记录校园网自动登录</span>
-        </a>
-      
-    
-  </div>
 
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-54cd4c898afba2d97f5a0c762cd580c7" role="tab" data-toggle="collapse" href="#collapse-54cd4c898afba2d97f5a0c762cd580c7"
-        aria-expanded="false"
-      >
-        replace libcurl4-guntls
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/replace-libcurl4-guntls/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse">
-        
-        
-          
-  <div id="collapse-54cd4c898afba2d97f5a0c762cd580c7" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-54cd4c898afba2d97f5a0c762cd580c7">
-    
-    
-      
-      
-        <a href="/2021/09/15/replace-gnutls-to-openssl/" class="list-group-item list-group-item-action">
-          <span class="category-post">openssl-dev替换guntls</span>
-        </a>
-      
-    
-  </div>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">openssl-dev替换guntls</h1>
+            
+            <div class="markdown-body">
+              <p>使用openssl-dev替换guntls<br>为什么会有这种需求呢？今天在拉取Android源码时，使用了机场梯子有点抽风，访问网页内容倒是没什么问题。<br>但拉取Github库时一直guntls_handshake()faild:The TLS connection was non-properly terminated，前后鼓搞了各种代理github还是没解决。(其实还是机场路线的问题，自己后来搭的就没此问题)<br/><br>这篇文章是为了解决遇到此问题，而不想自己搭科学的的这部分人。<br/><br>废话不多说，ubuntu先去软件更新那里打开source code,免得后面步骤无法编译</p>
+<span id="more"></span>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim">sudo apt-<span class="hljs-built_in">get</span> install build-essential fakeroot dpkg-dev<br><span class="hljs-built_in">mkdir</span> ~/git-openssl &amp;&amp; <span class="hljs-keyword">cd</span> git-openssl<br>sudo apt-<span class="hljs-built_in">get</span> <span class="hljs-keyword">source</span> git build-dep git<br></code></pre></td></tr></table></figure>
+<p>然后</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo vim <span class="hljs-regexp">/etc/</span>apt/sources.list<br></code></pre></td></tr></table></figure>
+<p>把里面的带# deb-src全部删掉#注释，保存<br/><br>然后</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vim">sudo apt <span class="hljs-keyword">update</span><br>sudo apt-<span class="hljs-built_in">get</span> build-dep git<br>sudo apt-<span class="hljs-built_in">get</span> install libcurl4-openssl-dev<br>sudo dpkg-<span class="hljs-keyword">source</span> <span class="hljs-keyword">x</span> git_2.*.dsc //这里版本不一样<br><span class="hljs-keyword">cd</span> git_2.*<br>sudo <span class="hljs-keyword">vim</span> debian/control<br></code></pre></td></tr></table></figure>
+<p>修改里面的libcurl4-guntls-dev为libcurl4-openssl-dev<br>接着</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">sudo dpkg-buildpackage -rfakeroot -<span class="hljs-selector-tag">b</span><br>cd ..<br>sudo dpkg -<span class="hljs-selector-tag">i</span> git_2.*-ubuntu3_amd64<span class="hljs-selector-class">.deb</span> <span class="hljs-comment">//版本不一样，更新很快</span><br></code></pre></td></tr></table></figure>
+<p>完成!<br>如果觉得麻烦，换个机场就行，可能某些机场线路被限制了</p>
 
-        
-      </div>
-    </div>
-  
-</div>
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/replace-libcurl4-guntls/">replace libcurl4-guntls</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/GitHub/">GitHub</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/02/Build-Android/">
+                        <span class="hidden-mobile">Build Android</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -340,9 +386,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 
