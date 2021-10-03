@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>build Android Kernel</title>
+    <link href="/2021/10/03/build-Android-Kernel/"/>
+    <url>/2021/10/03/build-Android-Kernel/</url>
+    
+    <content type="html"><![CDATA[<p>使用linaro编译一个Android内核，记录编译中的整体过程</br><br>下载linaro工具链，配置编译环境，从这里下载: <a href="https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-a/downloads">https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-a/downloads</a></p></br>导入<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">export CROSS_COMPILE=<span class="hljs-regexp">/home/</span>hali<span class="hljs-regexp">/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/</span>bin/aarch64-none-linux-gnu-<br><br><span class="hljs-regexp">//</span> 这里我也导入了arm32，网上说不导入编译会出错<br>export CROSS_COMPILE_ARM32=<span class="hljs-regexp">/home/</span>hali<span class="hljs-regexp">/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/</span>bin/aarch64-none-linux-gnu-<br></code></pre></td></tr></table></figure><p>编译arm64 device_configs</p><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">// 在内核工作目录</span><br><span class="hljs-keyword">export</span> ARCH=arm64<br>make device_configs<br></code></pre></td></tr></table></figure><p>编译</br>完成，博客有写不好的地方，请酌情浏览</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Android</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>openssl-dev替换guntls</title>
     <link href="/2021/09/15/replace-gnutls-to-openssl/"/>
     <url>/2021/09/15/replace-gnutls-to-openssl/</url>
