@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>build Android Kernel</title>
+      <link href="/2021/10/03/build-Android-Kernel/"/>
+      <url>/2021/10/03/build-Android-Kernel/</url>
+      
+        <content type="html"><![CDATA[<p>使用linaro编译一个Android内核，记录编译中的整体过程</br><br>下载linaro工具链，配置编译环境，从这里下载: <a href="https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-a/downloads">https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-a/downloads</a></p></br>导入<pre class="line-numbers language-none"><code class="language-none">export CROSS_COMPILE&#x3D;&#x2F;home&#x2F;hali&#x2F;gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu&#x2F;bin&#x2F;aarch64-none-linux-gnu-&#x2F;&#x2F; 这里我也导入了arm32，网上说不导入编译会出错export CROSS_COMPILE_ARM32&#x3D;&#x2F;home&#x2F;hali&#x2F;gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu&#x2F;bin&#x2F;aarch64-none-linux-gnu-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>编译arm64 device_configs</p><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 在内核工作目录export ARCH&#x3D;arm64make device_configs<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>编译</br>完成，博客有写不好的地方，请酌情浏览</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Android </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>openssl-dev替换guntls</title>
+      <link href="/2021/09/15/replace-gnutls-to-openssl/"/>
+      <url>/2021/09/15/replace-gnutls-to-openssl/</url>
+      
+        <content type="html"><![CDATA[<p>使用openssl-dev替换guntls<br>为什么会有这种需求呢？今天在拉取Android源码时，使用了机场梯子有点抽风，访问网页内容倒是没什么问题。<br>但拉取Github库时一直guntls_handshake()faild:The TLS connection was non-properly terminated，前后鼓搞了各种代理github还是没解决。(其实还是机场路线的问题，自己后来搭的就没此问题)<br/><br>这篇文章是为了解决遇到此问题，而不想自己搭科学的的这部分人。<br/><br>废话不多说，ubuntu先去软件更新那里打开source code,免得后面步骤无法编译</p><span id="more"></span><pre class="line-numbers language-none"><code class="language-none">sudo apt-get install build-essential fakeroot dpkg-devmkdir ~&#x2F;git-openssl &amp;&amp; cd git-opensslsudo apt-get source git build-dep git<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>然后</p><pre class="line-numbers language-none"><code class="language-none">sudo vim &#x2F;etc&#x2F;apt&#x2F;sources.list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>把里面的带# deb-src全部删掉#注释，保存<br/><br>然后</p><pre class="line-numbers language-none"><code class="language-none">sudo apt updatesudo apt-get build-dep gitsudo apt-get install libcurl4-openssl-devsudo dpkg-source x git_2.*.dsc &#x2F;&#x2F;这里版本不一样cd git_2.*sudo vim debian&#x2F;control<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>修改里面的libcurl4-guntls-dev为libcurl4-openssl-dev<br>接着</p><pre class="line-numbers language-none"><code class="language-none">sudo dpkg-buildpackage -rfakeroot -bcd ..sudo dpkg -i git_2.*-ubuntu3_amd64.deb &#x2F;&#x2F;版本不一样，更新很快<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>完成!<br>如果觉得麻烦，换个机场就行，可能某些机场线路被限制了</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> replace libcurl4-guntls </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> GitHub </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Build Android</title>
+      <link href="/2021/06/02/Build-Android/"/>
+      <url>/2021/06/02/Build-Android/</url>
+      
+        <content type="html"><![CDATA[<p>自己手头上有一台闲置的设备，小米max2 代号是oxygen。系统预装的是android 7.1.2,屏幕大小拿来监控挺合适的，7.1的系统现在显然有些apk是装不上的。既然这样，为何不自己编译呢？<br/>好了，正文开始</p><span id="more"></span><p>有一台高性能的服务器，或者自己的pc，要求<br/></p><li>RAM至少8GB起步</li><li>CPU内核不少于4核，编译最主要也就是核心数，决定编译时间</li><li>250GB以上的SSD最好</li><br/>建议购买服务器，不然编译加同步源码(国内特色网络)起码一天。<br/>我编译系统选的是ubuntu 20.04,安装编译时必须的组件<pre class="line-numbers language-jsunicoderegexp" data-language="jsunicoderegexp"><code class="language-jsunicoderegexp">sudo apt install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev openjdk-11-jdk git vim jq python<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>安装谷歌repo</p><pre class="line-numbers language-jsunicoderegexp" data-language="jsunicoderegexp"><code class="language-jsunicoderegexp">mkdir -p ~&#x2F;bincurl https:&#x2F;&#x2F;storage.googleapis.com&#x2F;git-repo-downloads&#x2F;repo &gt; ~&#x2F;bin&#x2F;repochmod a+x ~&#x2F;bin&#x2F;repo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>root模式时，设置变量</p><pre class="line-numbers language-jsunicoderegexp" data-language="jsunicoderegexp"><code class="language-jsunicoderegexp">cat &gt;&gt; ~&#x2F;.bashrc &lt;&lt;EOF# set PATH so it includes user&#39;s private bin if it existsif [ -d &quot;\$HOME&#x2F;bin&quot; ] ; then    PATH&#x3D;&quot;\$HOME&#x2F;bin:\$PATH&quot;fiEOFsource ~&#x2F;.bashrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>创建编译文件夹，这里我编译arrowos</p><pre class="line-numbers language-jsunicoderegexp" data-language="jsunicoderegexp"><code class="language-jsunicoderegexp">mkdir arrowcd arrowrepo init -u https:&#x2F;&#x2F;github.com&#x2F;ArrowOS&#x2F;android_manifest.git -b arrow-11.0  &#x2F;&#x2F; 这里是ArrowOS，记得选分支<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>repo</p><pre class="line-numbers language-jsunicoderegexp" data-language="jsunicoderegexp"><code class="language-jsunicoderegexp">repo sync &#x2F;&#x2F; 服务器环境直接使用该命令即可，自己电脑你可能需要加force参数<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>同步Device Tree/Kernel/vendor,小米max2的vendor还有common，也要同步。比如我的<a href="https://github.com/halibw/android_device_xiaomi_oxygen">https://github.com/halibw/android_device_xiaomi_oxygen</a><br/>然后按需修改</br>AndroidProducts.mk<br/>Device.mk等device文件</br>开始build</p><pre class="line-numbers language-jsunicoderegexp" data-language="jsunicoderegexp"><code class="language-jsunicoderegexp">. build&#x2F;envsetup.shlunch oxygen_arrow-userdebug &#x2F;&#x2F; oxygen是我max2的代号,首次编译建议选eng<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>好了，剩下的就是修改编译过程中出现的问题了,服务器编译记得安装终端复用器如tmux、screen</br><br>参考资料<a href="https://hackmd.io/@EdwardWu/CompileAndroidCustomROM">https://hackmd.io/@EdwardWu/CompileAndroidCustomROM</a> </br></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Android </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>记录校园网自动登录</title>
+      <link href="/2021/05/18/One-blogs/"/>
+      <url>/2021/05/18/One-blogs/</url>
+      
+        <content type="html"><![CDATA[<p>第一次写个人博客，记录下校园网的折腾。为了减少不必要重复学习的时间成本，把内容放在博客，方便下次直接采用。<br>学校采用的是深信服的认证，这网上已经有很多方法教程了，这里不展开详细说明。<br>首先，使用chrome获取认证链接，放到OpenWrt bash脚本里，实现开机自启</p><span id="more"></span><pre class="line-numbers language-bash" data-language="bash"><div class="caption"><span>Hello World!</span></div><code class="language-bash"><span class="token shebang important">#!/bin/sh /etc/rc.common</span><span class="token assign-left variable">START</span><span class="token operator">=</span><span class="token number">99</span><span class="token function-name function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token function">sleep</span> <span class="token number">10</span><span class="token assign-left variable">IP_LIST</span><span class="token operator">=</span><span class="token string">"www.baidu.com"</span> // <span class="token builtin class-name">test</span> network connect<span class="token keyword">for</span> <span class="token for-or-select variable">IP</span> <span class="token keyword">in</span> <span class="token variable">$IP_LIST</span><span class="token punctuation">;</span> <span class="token keyword">do</span>    <span class="token assign-left variable">NUM</span><span class="token operator">=</span><span class="token number">1</span>    <span class="token keyword">while</span> <span class="token punctuation">[</span> <span class="token variable">$NUM</span> -le <span class="token number">3</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">do</span>        <span class="token keyword">if</span> <span class="token function">ping</span> -c <span class="token number">1</span> <span class="token variable">$IP</span> <span class="token operator">></span> /dev/null<span class="token punctuation">;</span> <span class="token keyword">then</span>            <span class="token builtin class-name">echo</span> <span class="token string">"<span class="token variable">$IP</span> Ping is successful."</span>            <span class="token builtin class-name">break</span>        <span class="token keyword">else</span>        //在次输入chrome获取到的认证        //wget-----------<span class="token function">rm</span> -f /login.php //清除日志            FAIL_COUNT<span class="token punctuation">[</span><span class="token variable">$NUM</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token variable">$IP</span>            <span class="token builtin class-name">let</span> NUM++        <span class="token keyword">fi</span>    <span class="token keyword">done</span>    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$&#123;<span class="token operator">#</span>FAIL_COUNT<span class="token punctuation">[</span>*<span class="token punctuation">]</span>&#125;</span> -eq <span class="token number">3</span> <span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">then</span>//wget --------------<span class="token function">rm</span> -f /login.php        <span class="token builtin class-name">unset</span> FAIL_COUNT<span class="token punctuation">[</span>*<span class="token punctuation">]</span>    <span class="token keyword">fi</span><span class="token keyword">done</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>保存的时候，记得注意在windows系统下的CRLF LF格式<br>在linux环境编写时可忽略<br>最后链接到rc.d，使用chmod -R 777 修改权限<br><br/><br>完成</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> curl apply </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> OpenWrt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
